@@ -1,8 +1,8 @@
-This version fork previous versions and add:
-1. Add function protytypes to util.h
-2. Use CMake for compilation
+This version forks previous versions and:
+1. Adds function protytypes to util.h;
+2. Uses CMake for compilation.
 
-Software tested with Watts Up .NET, and compiled using LLVM/Clang 3.5
+The program was tested with Watts Up .NET, and compiled using LLVM/Clang 3.5.
 
 (Adel)
 
