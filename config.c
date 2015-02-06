@@ -97,4 +97,3 @@ struct wu_field wu_fields[wu_num_fields] = {
 		.descr	= "VA",
 	},
 };
-

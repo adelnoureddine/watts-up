@@ -10,8 +10,18 @@
 
 #define _GNU_SOURCE
 
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdio.h>
+
 #include "wattsup_common.h"
 #include "globals.h"
+#include "util.h"
+
+int fds;
+char * myfifo = "/tmp/wattsup";
 
 int main(int argc, char ** argv)
 {
@@ -108,8 +118,14 @@ int main(int argc, char ** argv)
 		}
 	}
 
-	if (!wu_no_data) {
+	// Pipes
+	// create the FIFO (named pipe)
+	mkfifo(myfifo, 0666);
 
+	// Open FIFO pipe
+	fds = open(myfifo, O_WRONLY);
+
+	if (!wu_no_data) {
 		if ((ret = wu_check_store(wu_option_count, fd)))
 			goto Close;
 
@@ -123,8 +139,17 @@ int main(int argc, char ** argv)
 		
 		wu_stop_log();
 	}
+
+	// Close pipe
+	close(fds);
+
+	/* remove the FIFO */
+	unlink(myfifo);
+
 Close:
 	close(fd);
+	close(fds);
+	unlink(myfifo);
 	return ret;
 }
 

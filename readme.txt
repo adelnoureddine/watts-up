@@ -1,3 +1,14 @@
+This version fork previous versions and add:
+1. Add function protytypes to util.h
+2. Use CMake for compilation
+
+Software tested with Watts Up .NET, and compiled using LLVM/Clang 3.5
+
+(Adel)
+
+
+----------------------------------------------------------------------
+
 The default baud rate is 115200.
 
 This code originated from here:

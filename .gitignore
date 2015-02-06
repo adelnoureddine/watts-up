@@ -2,6 +2,4 @@ TAGS
 *~
 *.o
 wattsup
-html
-test_library
-*.so
+.idea
