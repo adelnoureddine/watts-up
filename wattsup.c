@@ -20,9 +20,6 @@
 #include "globals.h"
 #include "util.h"
 
-int fds;
-char * myfifo = "/tmp/wattsup";
-
 int main(int argc, char ** argv)
 {
 	int ret;
@@ -118,12 +115,6 @@ int main(int argc, char ** argv)
 		}
 	}
 
-	// Pipes
-	// create the FIFO (named pipe)
-	mkfifo(myfifo, 0666);
-
-	// Open FIFO pipe
-	fds = open(myfifo, O_WRONLY);
 
 	if (!wu_no_data) {
 		if ((ret = wu_check_store(wu_option_count, fd)))
@@ -134,22 +125,14 @@ int main(int argc, char ** argv)
 
 		if ((ret = wu_start_log()))
 			goto Close;
-	    
+
 		wu_read_data(fd);
-		
+
 		wu_stop_log();
 	}
 
-	// Close pipe
-	close(fds);
-
-	/* remove the FIFO */
-	unlink(myfifo);
-
 Close:
 	close(fd);
-	close(fds);
-	unlink(myfifo);
 	return ret;
 }
 
