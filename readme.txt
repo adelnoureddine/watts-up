@@ -1,5 +1,5 @@
 This version forks previous versions and:
-1. Adds function protytypes to util.h;
+1. Adds function prototypes to util.h;
 2. Uses CMake for compilation.
 
 The program was tested with Watts Up .NET, and compiled using LLVM/Clang 3.5.
